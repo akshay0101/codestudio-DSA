@@ -1,0 +1,39 @@
+/*
+    Time Complexity : O(N^2)
+    Space complexity : O(1)
+
+    where N is the size of the input array
+*/
+
+int multiply(int a, int b)
+{
+    int mod = 1e9 + 7;
+    long long ret = a % mod;
+    ret *= (b % mod);
+    ret = ret % mod;
+    return ret;
+}
+
+int *getProductArrayExceptSelf(int *arr, int n)
+{
+    //Array to store the answer
+    int *answerArray = new int[n];
+
+    fill_n(answerArray, n, 1L);
+
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            if (i == j)
+            {
+                continue;
+            }
+
+            answerArray[i] = multiply(answerArray[i], arr[j]); 
+        }
+    }
+
+    //Return the answer
+    return answerArray;
+}
